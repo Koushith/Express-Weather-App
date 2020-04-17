@@ -6,8 +6,6 @@ const axios = require("axios");
 
 const API_KEYS = "3f4c8efde8dfa7274ccb444191aa597f";
 
-const url = `http://api.openweathermap.org/data/2.5/weather?q=London&appid=${API_KEYS}`;
-
 //  we are ready to export. controllers main job is to controll the flow
 
 exports.renderHomePage = (req, res) => {
@@ -20,10 +18,17 @@ exports.renderAboutPage = (req, res) => {
 
 exports.rendergetWeather = (req, res) => {
   const city = req.body.city; //city is coming from body of req. (replacement for value.)
+  const url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEYS}`;
   axios
     .get(url)
     .then((response) => {
-      console.log(response);
+      //   console.log(
+      //     `It is currently ${response.data.main.temp} in ${response.data.name}`
+      //   );  this will display in console.
+      // render his in web
+      res.render("index", {
+        Weather: `It is currently ${response.data.main.temp} in ${response.data.name}.`,
+      });
     })
     .catch((err) => {
       console.log(err);
