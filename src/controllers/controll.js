@@ -7,3 +7,8 @@ exports.renderHomePage = (req, res) => {
 exports.renderAboutPage = (req, res) => {
   res.render("about"); //we want to render index view
 };
+
+exports.rendergetWeather = (req, res) => {
+  console.log(req);
+  res.send(`you types ${req.body.city}`);
+};
