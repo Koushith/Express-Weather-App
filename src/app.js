@@ -5,6 +5,10 @@ const express = require("express");
 
 const app = express(); //init express app
 
+//use express router
+
+const router = require("./router");
+
 // middleware configuration
 
 app.use(express.urlencoded({ extended: false }));
@@ -29,14 +33,7 @@ app.set("view engine", "hbs"); //crender all files which has hbs extension
 // middlewares
 // when the user req home page, render home
 
-app.get("/", (req, res) => {
-  res.render("index", {
-    title: "Weather finder by koushith",
-  });
-});
-app.get("/about", (req, res) => {
-  res.render("about");
-});
+app.use("/", router); //user router module
 
 app.listen(3000, () => {
   console.log("Server is listening on port 3000");
